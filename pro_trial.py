@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Google AI Pro Trial (5 TB) — Minimalist CLI & Beginner-Friendly Launcher.
-
-Supports English (--lang en), Spanish (--lang es), and Simplified Chinese (--lang zh)
-interactive menus while delegating direct CLI flags to bridge.
-"""
+"""Google AI Pro (5 TB) trial tool — interactive menu and CLI entry point."""
 
 import os
 import re
