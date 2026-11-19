@@ -73,4 +73,4 @@ python pro_trial.py --no-add --no-switch --no-confirm --plan 3m --serial 127.0.0
 
 ## 许可与说明
 
-仅供个人测试与研究，请勿使用主力账号。基于 **gylive** 的工作修改，采用 MIT 许可证，详见 `LICENSE`。
+风险自负：请仅在丢了也不心疼的备用小号上使用，切勿用于主力账号。采用 MIT 许可证，详见 `LICENSE`。

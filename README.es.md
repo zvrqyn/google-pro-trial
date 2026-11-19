@@ -73,4 +73,4 @@ correo----contraseña----recuperación----clave_2fa----tarjeta----MM/AA----CVC--
 
 ## Licencia y aviso
 
-Solo para pruebas personales e investigación; no uses tu cuenta principal. Basado en el trabajo de **gylive**. Licencia MIT — ver `LICENSE`.
+Úsalo bajo tu propia responsabilidad: solo en cuentas secundarias que no te importe perder, nunca en tu cuenta principal. Licencia MIT — ver `LICENSE`.

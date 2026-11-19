@@ -73,4 +73,4 @@ email----password----recovery----2fa_secret----card----MM/YY----CVC----holder---
 
 ## License & notice
 
-For personal testing and research only; do not use on your main account. Based on work by **gylive**. Licensed under the MIT License — see `LICENSE`.
+Use at your own risk — only use secondary accounts you don't mind losing, never your main Google account. Licensed under the MIT License — see `LICENSE`.
