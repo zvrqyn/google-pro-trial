@@ -157,6 +157,28 @@ def _is_adbd_root() -> bool:
         return False
 
 
+def _reconnect_after_root() -> None:
+    global SERIAL
+    time.sleep(1.5)
+    for port in (16384, 16416, 7555, 5555):
+        try:
+            subprocess.run([ADB, "connect", f"127.0.0.1:{port}"], capture_output=True, timeout=4)
+        except Exception:
+            pass
+    for _ in range(8):
+        try:
+            out = subprocess.run([ADB, "devices"], capture_output=True, text=True, timeout=5).stdout
+            online = [l.split("\t")[0] for l in out.splitlines()[1:] if "\tdevice" in l]
+            if online:
+                if SERIAL not in online:
+                    tcp = [d for d in online if d.startswith("127.0.0.1:")]
+                    SERIAL = tcp[0] if tcp else online[0]
+                return
+        except Exception:
+            pass
+        time.sleep(1)
+
+
 def ensure_root():
     if _is_adbd_root():
         return
@@ -164,8 +186,17 @@ def ensure_root():
         uid = sh("shell", "su -c id", timeout=15)
     except Exception:
         uid = ""
-    if "uid=0" not in uid:
-        sys.exit("[err] Device lacks root access. Enable Root in MuMu settings and restart.")
+    if "uid=0" in uid:
+        return
+    # MuMu exposes root via `adb root`, which restarts adbd and can drop emulator-5554 until reconnected.
+    try:
+        sh("root", timeout=6)
+    except Exception:
+        pass
+    _reconnect_after_root()
+    if _is_adbd_root():
+        return
+    sys.exit("[err] Device lacks root access. Enable Root in MuMu settings and restart.")
 
 
 def _device_frida_arch() -> str:

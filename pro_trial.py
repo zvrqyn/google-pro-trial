@@ -253,14 +253,10 @@ def _check_env() -> bool:
 
     try:
         bridge.ensure_root()
-    except SystemExit:
-        _adb("root", timeout=10)
-        try:
-            bridge.ensure_root()
-        except SystemExit:
-            tag_err("Root", t("root_missing"))
-            return False
-    tag_ok("Root", "uid=0")
+    except (SystemExit, subprocess.TimeoutExpired):
+        tag_err("Root", t("root_missing"))
+        return False
+    tag_ok("Root", f"uid=0 ({bridge.SERIAL})")
 
     bridge.ensure_network()
     try:
